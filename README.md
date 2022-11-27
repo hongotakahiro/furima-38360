@@ -39,56 +39,58 @@ Things you may want to cover:
 
 ## Association
 
-- has_many :items
-- has_many :purchases_historys
+- has_many :item
+- has_many :purchases_history
 
 
 
 ### items テーブル
 
-| Column                | Type        | Options     |
-| --------------------  | ----------- | ----------- |
-| image                 | text        | null: false |
-| product_name          | text        | null: false |
-| discription           | text        | null: false |
-| category_id           | references  | null: false |
-| condition_id          | references  | null: false |
-| charge_id             | references  | null: false |
-| area_id               | references  | null: false |
-| delivery_days_id      | references  | null: false |
-| price                 | integer     | null: false |
-| users_id              | references  | null: false |
+| Column                | Type        | Options                        |
+| --------------------  | ----------- | ------------------------------ |
+| product_name          | string      | null: false                    |
+| discription           | text        | null: false                    |
+| category              | references  | null: false                    |
+| condition             | references  | null: false                    |
+| charge                | references  | null: false                    |
+| area                  | references  | null: false                    |
+| delivery_days         | references  | null: false                    |
+| price                 | integer     | null: false                    |
+| users                 | references  | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_one :purchases_historys
+- belongs_to :user
+- has_one :purchase_history
 
-#### purchases_historys テーブル
+#### purchase_histories テーブル
 
-| Column                | Type       | Options     |
-| --------------------- | ---------- | ----------- |
-| users_id              | references | null: false |
-| items_id              | references | null: false |
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | ------------------------------ |
+| users                 | references | null: false, foreign_key: true |
+| items                 | references | null: false, foreign_key: true |
 
 
 #### Association
 
-- belongs_to :users
-- belongs_to :items
-- has_one :shipping addresses
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
 
-##### shipping_addressess テーブル
+##### shipping_addresses テーブル
 
-| Column                | Type       | Options     |
-| --------------------- | ---------- | ----------- |
-| post_code             | string     | null: false |
-| prefectures           | string     | null: false |
-| municipality          | string     | null: false |
-| phone_number          | string     | null: false |
-| items_id              | references | null: false |
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | ------------------------------ |
+| post_code             | string     | null: false                    |
+| area                  | references | null: false                    |
+| municipality          | string     | null: false                    |
+| address               | string     | null: false                    |
+| municipality          | string     | null: false                    |
+| building_name         | string     |                                |
+| phone_number          | string     | null: false                    |
+| purchases_history     | references | null: false, foreign_key: true |
 
 
 ##### Association
 
-- belongs_to :purchases_historys
+- belongs_to :purchases_history
