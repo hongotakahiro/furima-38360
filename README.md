@@ -26,68 +26,69 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type   | Options                        |
-| ------------------ | ------ | ----------- ------------------ |
-| email              | string | null: false, foreign_key: true |
-| password           | string | null: false                    |
-| name               | string | null: false                    |
-| kana               | string | null: false                    |
-| date of birthday   | date   | null: false                    |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ----------- ------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| family_name        | string | null: false               |
+| first_name         | string | null: false               |
+| family_name_kana   | string | null: false               |
+| first_name_kana    | string | null: false               |
+| date_of_birthday   | date   | null: false               |
 
 ## Association
 
 - has_many :items
+- has_many :purchases_historys
+
 
 
 ### items テーブル
 
-| Column       | Type        | Options     |
-| ------------ | ----------- | ----------- |
-| product name | text        | null: false |
-| discription  | text        | null: false |
-| category     | text        | null: false |
-| condition    | text        | null: false |
-| price        | integer     | null: false |
-| users_id     | integer     | null: false |
+| Column                | Type        | Options     |
+| --------------------  | ----------- | ----------- |
+| image                 | text        | null: false |
+| product_name          | text        | null: false |
+| discription           | text        | null: false |
+| category_id           | references  | null: false |
+| condition_id          | references  | null: false |
+| charge_id             | references  | null: false |
+| area_id               | references  | null: false |
+| delivery_days_id      | references  | null: false |
+| price                 | integer     | null: false |
+| users_id              | references  | null: false |
 
 ### Association
 
 - belongs_to :users
-- has_one :buyers
-- has_one :shipping addresses
+- has_one :purchases_historys
 
-
-#### buyers テーブル
+#### purchases_historys テーブル
 
 | Column                | Type       | Options     |
 | --------------------- | ---------- | ----------- |
-| post code             | integer    | null: false |
-| prefectures           | string     | null: false |
-| Municipality          | string     | null: false |
-| phone number          | string     | null: false |
-| items_id              | integer    | null: false |
+| users_id              | references | null: false |
+| items_id              | references | null: false |
 
 
 #### Association
 
+- belongs_to :users
 - belongs_to :items
-- has_one :buyers
 - has_one :shipping addresses
 
-
-##### shippinmg addresses テーブル
+##### shipping_addressess テーブル
 
 | Column                | Type       | Options     |
 | --------------------- | ---------- | ----------- |
-| charge                | integer    | null: false |
-| area                  | string     | null: false |
-| date of ship          | date       | null: false |
-| items_id              | integer    | null: false |
-| buyers_id             | integer    | null: false |
-
-
+| post_code             | string     | null: false |
+| prefectures           | string     | null: false |
+| municipality          | string     | null: false |
+| phone_number          | string     | null: false |
+| items_id              | references | null: false |
 
 
 ##### Association
 
-- belongs_to :buyers
+- belongs_to :purchases_historys
