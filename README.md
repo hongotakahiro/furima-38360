@@ -85,7 +85,6 @@ Things you may want to cover:
 | area_id               | integer    | null: false                    |
 | municipality          | string     | null: false                    |
 | address               | string     | null: false                    |
-| municipality          | string     | null: false                    |
 | building_name         | string     |                                |
 | phone_number          | string     | null: false                    |
 | purchases_history     | references | null: false, foreign_key: true |
