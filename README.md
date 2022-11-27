@@ -24,7 +24,7 @@ Things you may want to cover:
 * ...
 # テーブル設計
 
-## users テーブル
+### users テーブル
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ----------- ------------- |
@@ -37,7 +37,7 @@ Things you may want to cover:
 | first_name_kana    | string | null: false               |
 | date_of_birthday   | date   | null: false               |
 
-## Association
+### Association
 
 - has_many :items
 - has_many :purchases_histories
@@ -63,7 +63,7 @@ Things you may want to cover:
 - belongs_to :user
 - has_one :purchase_history
 
-#### purchase_histories テーブル
+### purchase_histories テーブル
 
 | Column               | Type       | Options                        |
 | ---------------------| ---------- | ------------------------------ |
@@ -71,13 +71,13 @@ Things you may want to cover:
 | item                 | references | null: false, foreign_key: true |
 
 
-#### Association
+### Association
 
 - belongs_to :user
 - belongs_to :item
 - has_one :shipping_address
 
-##### shipping_addresses テーブル
+### shipping_addresses テーブル
 
 | Column                | Type       | Options                        |
 | --------------------- | ---------- | ------------------------------ |
@@ -90,6 +90,6 @@ Things you may want to cover:
 | purchases_history     | references | null: false, foreign_key: true |
 
 
-##### Association
+### Association
 
 - belongs_to :purchases_history
