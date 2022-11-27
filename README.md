@@ -39,8 +39,8 @@ Things you may want to cover:
 
 ## Association
 
-- has_many :item
-- has_many :purchases_history
+- has_many :items
+- has_many :purchases_histories
 
 
 
@@ -50,13 +50,13 @@ Things you may want to cover:
 | --------------------  | ----------- | ------------------------------ |
 | product_name          | string      | null: false                    |
 | discription           | text        | null: false                    |
-| category              | references  | null: false                    |
-| condition             | references  | null: false                    |
-| charge                | references  | null: false                    |
-| area                  | references  | null: false                    |
-| delivery_days         | references  | null: false                    |
+| category_id           | integer     | null: false                    |
+| condition_id          | integer     | null: false                    |
+| charge_id             | integer     | null: false                    |
+| area_id               | integer     | null: false                    |
+| delivery_days_id      | integer     | null: false                    |
 | price                 | integer     | null: false                    |
-| users                 | references  | null: false, foreign_key: true |
+| user                  | references  | null: false, foreign_key: true |
 
 ### Association
 
@@ -65,10 +65,10 @@ Things you may want to cover:
 
 #### purchase_histories テーブル
 
-| Column                | Type       | Options                        |
-| --------------------- | ---------- | ------------------------------ |
-| users                 | references | null: false, foreign_key: true |
-| items                 | references | null: false, foreign_key: true |
+| Column               | Type       | Options                        |
+| ---------------------| ---------- | ------------------------------ |
+| user                 | references | null: false, foreign_key: true |
+| item                 | references | null: false, foreign_key: true |
 
 
 #### Association
@@ -82,7 +82,7 @@ Things you may want to cover:
 | Column                | Type       | Options                        |
 | --------------------- | ---------- | ------------------------------ |
 | post_code             | string     | null: false                    |
-| area                  | references | null: false                    |
+| area_id               | integer    | null: false                    |
 | municipality          | string     | null: false                    |
 | address               | string     | null: false                    |
 | municipality          | string     | null: false                    |
