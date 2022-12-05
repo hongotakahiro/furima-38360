@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
     before_action :basic_auth
+  #   before_action :authenticate_user!
+    before_action :configure_permitted_parameters, if: :devise_controller?
+
+  end
+  
 
 
     def show
@@ -12,4 +17,11 @@ class ApplicationController < ActionController::Base
         username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]  # 環境変数を読み込む記述に変更
     end
   end
-end
+
+  private
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :email, :password, :family_name, :first_name, :family_name_kana, :first_name_kana, :date_of_birth])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+
+  end
+
