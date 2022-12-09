@@ -117,7 +117,7 @@ describe 'ユーザー新規登録' do
       it "名字のフリガナは全角でなければ登録できない" do
         @user.family_name_kana = "yamada"
         @user.valid?
-        expect(@user.errors.full_messages).to include "Family name kana 全角文字を使用してください"
+        expect(@user.errors.full_messages).to include "Family name kana 全角カナ文字を使用してください"
         end      
 
     it "first_nameが空だと登録できない" do
@@ -138,7 +138,7 @@ describe 'ユーザー新規登録' do
     it "名前のフリガナは全角でなければ登録できない" do
       @user.first_name_kana = "taro"
       @user.valid?
-      expect(@user.errors.full_messages).to include "First name kana 全角文字を使用してください"
+      expect(@user.errors.full_messages).to include "First name kana 全角カナ文字を使用してください"
       end
     it "生年月日が空だと登録できない" do
       @user.date_of_birth = ""
