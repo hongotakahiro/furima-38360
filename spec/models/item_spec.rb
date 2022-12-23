@@ -9,21 +9,16 @@ RSpec.describe Item, type: :model do
       it 'product_name, description, category, condition, charge, area, delivery_days, price, user,imageが存在すれば出品できる' do
         expect(@item).to be_valid
       end
-
-      it 'ログイン状態のユーザーのみ、商品出品ページへ遷移できること' do
-        @item = FactoryBot.create(:user)
-        expect(@item).to be_valid
-      end
     end
 
     context '新規登録が上手くいかない時' do
-      it 'Price can not be smaller than to 300 and greatern than 9999999' do
+      it 'Price can not be smaller than to 300 and greater than 9999999' do
         @item.price = 20
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
 
-      it 'Price can not be gigger than to 300 and greatern than 9999999' do
+      it 'Price can not be gigger than to 300 and greater than 9999999' do
         @item.price = 99_999_994
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
