@@ -20,5 +20,3 @@ class User < ApplicationRecord
     validates :family_name_kana
   end
 end
-
-
