@@ -14,11 +14,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def create
-    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -27,27 +25,25 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
+    return unless @item.user_id != current_user.id
 
-    if @item.user_id != current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path
   end
 
   def update
-    @item = Item.find(params[:id])
-    @item.update(item_params)
-
-    if @item.save
+    if @item.update(item_params)
       redirect_to item_path
     else
-      #updateを失敗すると編集ページへ
+      # updateを失敗すると編集ページへ
       render 'edit'
     end
-
   end
 
   private
+
+  def set_furima
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:product_name, :description, :category_id, :condition_id, :charge_id, :area_id, :delivery_days_id,
