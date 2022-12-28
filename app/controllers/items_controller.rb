@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_furima, only: [:edit, :show, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -17,6 +18,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -25,9 +27,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return unless @item.user_id != current_user.id
-
-    redirect_to root_path
+    if @item.user_id != current_user.id
+      redirect_to root_path
+    end  
   end
 
   def update
