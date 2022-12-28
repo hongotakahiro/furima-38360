@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_furima, only: [:edit, :show, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -14,7 +15,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def create
@@ -26,7 +26,26 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    if @item.user_id != current_user.id
+      redirect_to root_path
+    end  
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      # updateを失敗すると編集ページへ
+      render 'edit'
+    end
+  end
+
   private
+
+  def set_furima
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:product_name, :description, :category_id, :condition_id, :charge_id, :area_id, :delivery_days_id,
