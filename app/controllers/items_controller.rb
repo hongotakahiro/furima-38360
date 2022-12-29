@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_furima, only: [:edit, :show, :update]
+  before_action :set_furima, only: [:edit, :show, :update, :destroy]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -39,6 +39,15 @@ class ItemsController < ApplicationController
       # updateを失敗すると編集ページへ
       render 'edit'
     end
+  end
+
+  def destroy
+    if @item.user != current_user
+      redirect_to root_path
+    else
+      @item.destroy
+      redirect_to root_path
+    end  
   end
 
   private
