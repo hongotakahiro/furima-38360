@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :date_of_birth, presence: true
 
   has_many :items
+  has_many :purchase_histories
   # has_many :purchases_histories
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
