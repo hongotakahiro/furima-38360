@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_furima, only: [:edit, :show, :update, :destroy]
+  before_action :prevent_pass, only: [:edit, :destroy]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -27,7 +28,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path    if @item.user_id != current_user.id || @item.purchase_history.present?
+    # redirect_to root_path    if @item.user_id != current_user.id || @item.purchase_history.present?（学習用で記録を残します）
   end
 
   def update
@@ -40,11 +41,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.user != current_user
-      redirect_to root_path
-    else
-      @item.destroy
-      redirect_to root_path
+    # if @item.user != current_user（学習用で記録を残します）
+    #   redirect_to root_path
+    # else
+    #   @item.destroy
+    #   redirect_to root_path
     end
   end
 
@@ -58,4 +59,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:product_name, :description, :category_id, :condition_id, :charge_id, :area_id, :delivery_days_id,
                                  :price, :image).merge(user_id: current_user.id)
   end
-end
+  
+  def prevent_pass
+    redirect_to root_path    if @item.user_id != current_user.id || @item.purchase_history.present?
+  end
+
+

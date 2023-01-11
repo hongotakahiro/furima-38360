@@ -2,19 +2,15 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :item_find, only: [:index, :create]
 
-#   before_action :@item = Item.find(params[:item_id]), only: [:index, :create]
-#   before_action :redirect_to root_path    if @item.user_id != current_user.id || @item.purchase_history.nil?
-# end
+
   before_action :prevent_url, only: [:index, :create]
 
   def index
     @purchase_address = PurchaseAddress.new
-    # @item = Item.find(params[:item_id])
   end
 
   def create
     @purchase_address = PurchaseAddress.new(purchase_history_params)
-    # @item = Item.find(params[:item_id])
     if @purchase_address.valid?
       pay_item
       @purchase_address.save
