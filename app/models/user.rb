@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :date_of_birth, presence: true
 
   has_many :items
-  # has_many :purchases_histories
+  has_many :purchase_histories
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
