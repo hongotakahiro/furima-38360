@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :purchase_address do
-    # user { '鈴木' }
+    # user { '鈴木' }（学習用として残します)
     # item_id { 3 }
 
     post_code { '123-4567' }
