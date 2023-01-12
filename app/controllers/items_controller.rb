@@ -44,8 +44,8 @@ class ItemsController < ApplicationController
     # if @item.user != current_user（学習用で記録を残します）
     #   redirect_to root_path
     # else
-    #   @item.destroy
-    #   redirect_to root_path
+      @item.destroy
+      redirect_to root_path
     end
   end
 
