@@ -40,7 +40,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :purchases_histories
+- has_many :purchase_histories
 
 
 
